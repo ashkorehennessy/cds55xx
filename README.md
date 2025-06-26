@@ -16,9 +16,13 @@
 
 ## 移植说明
 
-仅需要修改相应头文件，再实现`CDS55XX_SendPacket`函数即可完成移植
+对于C语言版本，仅需要修改相应头文件，再实现`CDS55XX_SendPacket`函数即可完成移植
+
+对于Python版本，仅需要修改使用的串口设备和波特率即可完成移植
 
 ## 使用方式
+
+注意：需要等待舵机上电后至少1秒钟才能进行任何操作
 
 ### 单个舵机控制
 
@@ -37,12 +41,16 @@
 
 ### 示例代码
 
+C语言版本：
+
 ```c
 uint8_t servo_list[4] = {1, 2, 3, 4};
 uint8_t motor_list[2] = {5, 6};
 uint16_t servo_pos[4] = {512, 512, 512, 512};
 uint16_t servo_speed[4] = {200, 200, 200, 200};
 uint16_t motor_speed[2] = {100, -100};
+
+HAL_Delay(1000);
 
 CDS55XX_SetMode(1, CDS55XX_MODE_SERVO);
 CDS55XX_SetMode(2, CDS55XX_MODE_SERVO);
